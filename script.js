@@ -1,39 +1,51 @@
 const tools = [
-  "AI Chat",
-  "Writing Assistant",
-  "Grammar Checker",
-  "Code Generator",
-  "Text Summarizer",
-  "Research Tool",
-  "Language Translator",
-  "Idea Generator",
-  "Email Writer",
-  "PDF Parser"
+  "Design Thinking",
+  "Persona Creation",
+  "Empathy Mapping",
+  "User Journey",
+  "Wireframe",
+  "Prototype",
+  "Usability Test",
+  "Accessibility",
+  "Heatmap",
+  "Competitor Analysis",
+  "Card Sorting"
 ];
 
 const searchInput = document.getElementById("searchInput");
-const suggestionsBox = document.getElementById("suggestions");
+const resultsContainer = document.getElementById("results");
+const suggestionBox = document.getElementById("suggestions");
 
-function showSuggestions() {
-  const input = searchInput.value.toLowerCase();
-  suggestionsBox.innerHTML = "";
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase();
+  const filtered = tools.filter(tool => tool.toLowerCase().includes(query));
 
-  if (input.length === 0) return;
-
-  const filtered = tools.filter(tool => tool.toLowerCase().includes(input));
-  
-  if (filtered.length === 0) {
-    suggestionsBox.innerHTML = `<li>No results found</li>`;
-    return;
+  // Show suggestions
+  suggestionBox.innerHTML = "";
+  if (query && filtered.length > 0) {
+    filtered.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      li.onclick = () => {
+        searchInput.value = item;
+        suggestionBox.innerHTML = "";
+        showResults([item]);
+      };
+      suggestionBox.appendChild(li);
+    });
+  } else {
+    suggestionBox.innerHTML = "";
   }
 
-  filtered.forEach(tool => {
-    const li = document.createElement("li");
-    li.textContent = tool;
-    li.onclick = () => {
-      searchInput.value = tool;
-      suggestionsBox.innerHTML = "";
-    };
-    suggestionsBox.appendChild(li);
+  showResults(filtered);
+});
+
+function showResults(results) {
+  resultsContainer.innerHTML = "";
+  results.forEach(tool => {
+    const div = document.createElement("div");
+    div.className = "tool-card";
+    div.textContent = tool;
+    resultsContainer.appendChild(div);
   });
 }
