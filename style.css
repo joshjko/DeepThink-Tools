@@ -31,26 +31,25 @@ h1 {
   font-size: 16px;
 }
 
-#suggestions {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background: #2a2c33;
-  border-radius: 8px;
-  overflow: hidden;
-  max-height: 160px;
-}
-
-#suggestions li {
-  padding: 10px 14px;
-  border-bottom: 1px solid #3a3c42;
-  cursor: pointer;
-  color: #ccc;
-}
-
-#suggestions li:hover {
-  background: #3a3c42;
+.suggestion-list {
+  background-color: #1f1f1f;
   color: #fff;
+  list-style: none;
+  padding: 0.5em;
+  margin-top: 5px;
+  border-radius: 5px;
+  max-height: 150px;
+  overflow-y: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.suggestion-list li {
+  padding: 0.4em;
+  cursor: pointer;
+}
+
+.suggestion-list li:hover {
+  background-color: #333;
 }
 
 .tool-filters {
